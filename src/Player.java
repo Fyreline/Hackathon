@@ -1,13 +1,13 @@
 public class Player {
-    public static int health = 5;
+    public int health = 5;
 
-    static int[] pos=new int[2];
-    public static int[] initialisePos(){
-        pos[0]=0;
-        pos[1]=0;
+    int[] pos=new int[2];
+    public int[] setPos(int row, int column){
+        pos[0]=row;
+        pos[1]=column;
         return pos;
     }
-    public static int[] updatePos(String direction){
+    public int[] updatePos(int[] pos, String direction){
         if (direction=="North"){
             pos[0]++;
         } else if (direction=="East"){
@@ -17,9 +17,11 @@ public class Player {
         } else if (direction=="West"){
             pos[1]--;
         }
+        return pos;
     }
-    public static void printPos(){
-        System.out.print("Your coordinates are"+pos[0]+", "+pos[1]+".");
+    public void printPos(int[] pos){
+        System.out.println();
+        System.out.print("Your coordinates are "+pos[0]+", "+pos[1]+".");
         System.out.println();
     }
 

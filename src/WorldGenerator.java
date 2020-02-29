@@ -1,7 +1,5 @@
 public class WorldGenerator {
 
-    // TODO Print the world, Generate terrain, make sure land isn't randomly in the sea
-
     public static double[][] heightMap(int dim){
         double[][] HeightMap=Biomes.heightGenerator(dim);
         return HeightMap;
@@ -18,5 +16,21 @@ public class WorldGenerator {
             System.out.println();
         }
         return tileValue;
+    }
+
+    private static void boardPrinter(int dimension, String[][] boardLayout){
+        System.out.println();
+        for (int i=0; i<dimension; i+=1){
+            System.out.print(" ");
+            //Loops each square in the row
+            for (int c=0; c<dimension; c+=1){
+                System.out.print(boardLayout[i][c]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+    public static void displayBoard(String[][] boardLayout, int dimension) {
+            boardPrinter(dimension, boardLayout);
     }
 }
