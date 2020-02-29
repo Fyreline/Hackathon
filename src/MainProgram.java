@@ -1,8 +1,10 @@
 public class MainProgram {
 
-    private static final int alterDimension = 8; //2^n+1 for diamond
+    private static final int alterDimension = 4; //2^n+1 for diamond
 
     public static void main(String[] args){
+        Player.initialisePos();
+
         int dim = (int) Math.pow(2, alterDimension)+1;
         System.out.println(dim);
 

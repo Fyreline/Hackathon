@@ -37,7 +37,7 @@ public class Biomes {
         double h = 500.0;
         Random r = new Random();
 
-        for(int sideLength = dim -1; sideLength >= 2; sideLength /=2){
+        for(int sideLength = dim -1; sideLength >= 2; sideLength /=2, h/= 1.05){
             int halfSide = sideLength/2;
             //generate the new square values
             for(int x = 0; x< dim -1; x+=sideLength){
