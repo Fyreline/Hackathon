@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MainProgram {
@@ -9,39 +11,41 @@ public class MainProgram {
         System.out.println();
         System.out.println("1. View World Map");
         System.out.println("2. Local View");
-        System.out.println("3. Print Current Coords");
-        System.out.println("4. End The Miserable Simulation We Call Life");
+        System.out.println("3. Move Tile");
+        System.out.println("4. Print Current Coords");
+        System.out.println("5. End The Miserable Simulation We Call Life");
         System.out.println();
         System.out.print("Input: ");
         boolean valid = false;
 
         int input = scanner.nextInt();
-        if (input>0 && input<5){
+        if (input>0 && input<6){
             valid = true;
         }
         while (!valid){
             System.out.println();
             System.out.println("----------------------------------------");
             System.out.println();
-            System.out.println("Please re-enter a value between 1-4");
+            System.out.println("Please re-enter a value between 1-5");
             System.out.println("----------------------------------------");
             System.out.println();
             System.out.println("1. View World Map");
             System.out.println("2. Local View");
-            System.out.println("3. Print Current Coords");
-            System.out.println("4. End The Miserable Simulation We Call Life");
+            System.out.println("3. Move Tile");
+            System.out.println("4. Print Current Coords");
+            System.out.println("5. End The Miserable Simulation We Call Life");
             System.out.println();
             System.out.print("Input: ");
         }
         return input;
     }
 
-    private static void gameLoop(int dim, String[][] world){
+    private static void gameLoop(int dim, String[][] world, double[][] heightMap){
         Player player = new Player();
         boolean startXCoordValid = false;
         boolean startYCoordValid = false;
         while (!startXCoordValid || !startYCoordValid){
-            System.out.println(dim);
+            System.out.println();
             System.out.println("----------------------------------------");
             System.out.println();
             System.out.println("Please enter the xCoord you would like to begin your adventure: ");
@@ -67,13 +71,35 @@ public class MainProgram {
         }
 
         boolean exit=false;
+        int biomesGenerated=0;
 
         while (!exit){
             int choice = menuChoices(SCANNER);
             if (choice==1)WorldGenerator.displayBoard(world, dim);
-            else if (choice==2);
-            else if (choice==3)player.printPos(player.pos);
-            else if (choice==4)exit=true;
+            else if (choice==2){
+                Map<int[], int[]> map = new LinkedHashMap<>();
+
+                DetailedBiome biome = new DetailedBiome();
+                map.put(biome.tileCoord, biome.tileCoord);
+                biome.tileCoord=player.pos;
+                biome.biome=world[player.pos[0]][player.pos[1]];
+                double tmpHeight;
+                tmpHeight=heightMap[biome.tileCoord[0]][biome.tileCoord[1]];
+                biome.height= tmpHeight;
+
+                biome.printBiome();
+            }
+            else if (choice==3){
+                System.out.println();
+                System.out.println("Would you like to move:");
+                System.out.println();
+                System.out.println("1. North\n2. East\n3. South\n4. West\n");
+                System.out.println("Input: ");
+                int direction = SCANNER.nextInt();
+                player.updatePos(player.pos, direction);
+            }
+            else if (choice==4)player.printPos(player.pos);
+            else if (choice==5)exit=true;
         }
     }
 
@@ -88,7 +114,7 @@ public class MainProgram {
         }
         String[][] world = WorldGenerator.generateStartLand(dim, heightMap);
 
-        gameLoop(dim, world);
+        gameLoop(dim, world, heightMap);
 
         SCANNER.close();
     }

@@ -5,26 +5,13 @@ import java.util.Random;
 
 public class Biomes {
 
-    protected static final String plains = "P";
-    protected static final String forest = "F";
-    protected static final String mountain = "M";
-    protected static final String sea = "S";
-    protected static final String snowyPeak = "*";
+    public static final String plains = "P";
+    public static final String forest = "F";
+    public static final String mountain = "M";
+    public static final String sea = "S";
+    public static final String snowyPeak = "*";
 
-    public static final double numOfBiomes = 4;
-
-    private static double valueGen(double topLeft, double topRight, double bottomLeft, double bottomRight){
-        int threeOrFour = 4;
-        if (topLeft==0 || topRight==0 || bottomLeft==0 || bottomRight==0){
-            threeOrFour=3;
-        }
-        double rndmAddSubtract = -1;
-        if (Math.random()>0.5){
-            rndmAddSubtract=1;
-        }
-        double value = ((topLeft+topRight+bottomLeft+bottomRight)/threeOrFour)+Math.random()*rndmAddSubtract*1.5;
-        return value;
-    }
+    public static final double numOfBiomes = 5;
 
     public static double[][] heightGenerator (int dim){
         double[][] data = new double[dim][dim];
@@ -106,23 +93,7 @@ public class Biomes {
         return data;
     }
 
-    /**public static String startTileValue (double seed) {
-        String rtnValue = sea;
-        if (seed>0.75) {
-            rtnValue = sea;
-        } else if (seed < (1 / numOfBiomes)) {
-            rtnValue = plains;
-        } else if (seed < (2 / numOfBiomes)) {
-            rtnValue = forest;
-        } else if (seed < (3 / numOfBiomes)) {
-            rtnValue = mountain;
-        } else if (seed < (4 / numOfBiomes)) {
-            rtnValue = sea;
-        }
-        return rtnValue;
-    }*/
-
-    public static String startTileValue (double seed) {
+    public static String startTileValue(double seed) {
         String tileValue = sea;
         if (seed<50){
             tileValue=sea;
@@ -139,3 +110,4 @@ public class Biomes {
     }
 
 }
+

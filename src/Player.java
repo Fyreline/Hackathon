@@ -7,15 +7,15 @@ public class Player {
         pos[1]=column;
         return pos;
     }
-    public int[] updatePos(int[] pos, String direction){
-        if (direction=="North"){
-            pos[0]++;
-        } else if (direction=="East"){
-            pos[1]++;
-        } else if (direction=="South"){
-            pos[0]--;
-        } else if (direction=="West"){
+    public int[] updatePos(int[] pos, int direction){
+        if (direction==1){
             pos[1]--;
+        } else if (direction==2){
+            pos[0]++;
+        } else if (direction==3){
+            pos[1]++;
+        } else if (direction==4){
+            pos[0]--;
         }
         return pos;
     }
